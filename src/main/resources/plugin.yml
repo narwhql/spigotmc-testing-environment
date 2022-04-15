@@ -8,3 +8,6 @@ commands:
     description: Spawn a rotating armor stand
   pet:
     description: Spawn a pet!
+  chatcolor:
+    aliases: [cc]
+    description: Change your chat color
