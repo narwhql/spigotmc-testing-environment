@@ -60,13 +60,16 @@ public class InventoryCommand implements CommandExecutor {
                         ItemMeta itemMeta = itemStack.getItemMeta();
                         itemMeta.setDisplayName("§e§lInventory - " + inventory.getId());
                         itemMeta.setLore(Arrays.asList(
+                                "",
                                 "§7ID: §b" + inventory.getId(),
                                 "§7Created at: §b" + new Date(inventory.getCreatedTimestamp()).toGMTString(),
                                 "§7Last update: §b" + new Date(inventory.getLastUpdateTimestamp()).toGMTString(),
                                 "",
-                                "§eLeft click to load",
-                                "§eRight click to preview",
-                                "§cMiddle click to delete permanently"
+                                "§e➤ Left click to load",
+                                "§e➤ Right click to preview",
+                                "§e➤ Middle click to update",
+                                "",
+                                "§c§l⚠ Shift + click to delete"
                         ));
                         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                         itemStack.setItemMeta(itemMeta);

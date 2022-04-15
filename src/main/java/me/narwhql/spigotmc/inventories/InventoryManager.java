@@ -92,9 +92,14 @@ public class InventoryManager implements Listener {
                 Bukkit.dispatchCommand(event.getWhoClicked(), "inventory preview " + id);
             }
 
-            else if (event.getClick() == ClickType.MIDDLE) {
+            else if (event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT) {
                 event.getWhoClicked().closeInventory();
                 Bukkit.dispatchCommand(event.getWhoClicked(), "inventory delete " + id);
+            }
+
+            else if (event.getClick() == ClickType.MIDDLE) {
+                event.getWhoClicked().closeInventory();
+                Bukkit.dispatchCommand(event.getWhoClicked(), "inventory save " + id);
             }
         }
     }

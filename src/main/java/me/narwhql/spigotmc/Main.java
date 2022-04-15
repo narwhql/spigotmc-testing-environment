@@ -6,6 +6,7 @@ import me.narwhql.spigotmc.commands.InventoryCommand;
 import me.narwhql.spigotmc.commands.PetCommand;
 import me.narwhql.spigotmc.inventories.InventoryManager;
 import me.narwhql.spigotmc.listeners.AsyncPlayerChatListener;
+import me.narwhql.spigotmc.listeners.Listeners;
 import me.narwhql.spigotmc.pets.PetManager;
 import me.narwhql.spigotmc.player.PlayerManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -68,5 +69,6 @@ public class Main extends JavaPlugin {
 
     private void initListeners() {
         this.getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(), this);
+        this.getServer().getPluginManager().registerEvents(new Listeners(), this);
     }
 }
