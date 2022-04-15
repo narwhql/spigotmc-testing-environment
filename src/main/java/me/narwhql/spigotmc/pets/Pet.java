@@ -52,6 +52,7 @@ public class Pet {
         if (this.despawnSound != null) this.entity.getWorld().playSound(this.entity.getLocation(), this.despawnSound, this.volume, this.pitch);
         for (int i = 0; i < 6; i++) this.entity.getWorld().playEffect(this.entity.getLocation(), Effect.SMOKE, 10, 10);
         this.entity.remove();
+        Main.getInstance().getPetManager().removePlayerPet(this.owner);
     }
 
     public void moveToLocation(Location location){
