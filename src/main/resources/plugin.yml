@@ -6,9 +6,5 @@ commands:
   armorstand:
     aliases: [as]
     description: Spawn a rotating armor stand
-  send:
-    description: Say things in discord
   pet:
     description: Spawn a pet!
-  block:
-    description: Get redstone blocks

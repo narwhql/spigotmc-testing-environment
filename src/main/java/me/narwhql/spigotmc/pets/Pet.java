@@ -30,7 +30,7 @@ public class Pet {
         if (this.owner == null) return;
 
         this.entity = this.owner.getWorld().spawnEntity(this.owner.getLocation(), entityType);
-        this.entity.setCustomName("§9" + this.owner.getName() + "'s §7Friend");
+        this.entity.setCustomName("§9" + this.owner.getName() + "'s §7Custom Pet");
     }
 
     public Entity getEntity() {
