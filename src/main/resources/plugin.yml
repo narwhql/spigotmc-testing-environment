@@ -1,0 +1,14 @@
+name: SpigotMC
+author: narwhql
+version: 1.0
+main: me.narwhql.spigotmc.Main
+commands:
+  armorstand:
+    aliases: [as]
+    description: Spawn a rotating armor stand
+  send:
+    description: Say things in discord
+  pet:
+    description: Spawn a pet!
+  block:
+    description: Get redstone blocks
