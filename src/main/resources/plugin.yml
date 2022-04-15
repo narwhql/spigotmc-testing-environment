@@ -11,3 +11,6 @@ commands:
   chatcolor:
     aliases: [cc]
     description: Change your chat color
+  inventory:
+    aliases: [inv]
+    description: Manage your inventories

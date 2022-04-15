@@ -21,6 +21,7 @@ public class MySQL {
             loadTables();
             Bukkit.getLogger().info("[MySQL] Connected to MySQL!");
         } catch (SQLException e) {
+            e.printStackTrace();
             Bukkit.getLogger().info("[MySQL] Could not connect to MySQL!");
         }
     }
@@ -31,5 +32,6 @@ public class MySQL {
 
     private void loadTables() throws SQLException {
         this.connection.prepareStatement("CREATE TABLE IF NOT EXISTS ChatColors (name VARCHAR(16), color VARCHAR(1), PRIMARY KEY(name))").executeUpdate();
+        this.connection.prepareStatement("CREATE TABLE IF NOT EXISTS PlayerInventories (id BIGINT NOT NULL AUTO_INCREMENT, name VARCHAR(16), created_timestamp BIGINT, last_update_timestamp BIGINT, inventory LONGTEXT, PRIMARY KEY(id))").executeUpdate();
     }
 }
