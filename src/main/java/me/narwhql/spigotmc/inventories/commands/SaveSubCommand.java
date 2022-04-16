@@ -3,6 +3,7 @@ package me.narwhql.spigotmc.inventories.commands;
 import me.narwhql.spigotmc.Util;
 import me.narwhql.spigotmc.experimental.classes.Command;
 import me.narwhql.spigotmc.experimental.classes.SubCommand;
+import me.narwhql.spigotmc.experimental.manager.CommandUtil;
 import me.narwhql.spigotmc.inventories.PlayerInventory;
 import me.narwhql.spigotmc.player.CustomPlayer;
 
@@ -23,15 +24,11 @@ public class SaveSubCommand extends SubCommand {
             PlayerInventory inventory = player.getExistingInventory(id);
 
             if (inventory == null) {
-                player.sendMessage("§3§m-----------------------------------------------------");
-                player.sendMessage("§cInventory with ID " + id + " does not exist!");
-                player.sendMessage("§3§m-----------------------------------------------------");
+                CommandUtil.sendMessage(player, "§cInventory with ID " + id + " does not exist!");
                 return;
             }
 
-            player.sendMessage("§3§m-----------------------------------------------------");
-            player.sendMessage("§aInventory with ID §e" + id + " §ahas been updated!");
-            player.sendMessage("§3§m-----------------------------------------------------");
+            CommandUtil.sendMessage(player, "§aInventory with ID §e" + id + " §ahas been updated!");
 
             player.updateExistingInventory(id, player.getInventory());
 
@@ -39,15 +36,11 @@ public class SaveSubCommand extends SubCommand {
         }
 
         if (player.getInventories().size() >= player.getMaxinventoriesSize()) {
-            player.sendMessage("§3§m-----------------------------------------------------");
-            player.sendMessage("§cYou cannot have more than 9 inventories!");
-            player.sendMessage("§3§m-----------------------------------------------------");
+            CommandUtil.sendMessage(player, "§cYou cannot have more than 9 inventories!");
             return;
         }
 
-        player.sendMessage("§3§m-----------------------------------------------------");
-        player.sendMessage("§aA new inventory has been saved!");
-        player.sendMessage("§3§m-----------------------------------------------------");
+        CommandUtil.sendMessage(player, "§aA new inventory has been saved!");
 
         player.saveNewInventory(player.getInventory());
     }

@@ -25,7 +25,7 @@ public class ChatColorCommand extends Command {
         String color = args[0].toLowerCase();
 
         if (!this.validColors.contains(color)) {
-            CommandUtil.sendMessageInfo(player, "§cThis color does not exist!");
+            CommandUtil.sendMessage(player, "§cThis color does not exist!", ChatColor.YELLOW);
             return;
         }
 

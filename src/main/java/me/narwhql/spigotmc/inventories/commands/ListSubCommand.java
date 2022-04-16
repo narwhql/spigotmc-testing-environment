@@ -2,6 +2,7 @@ package me.narwhql.spigotmc.inventories.commands;
 
 import me.narwhql.spigotmc.experimental.classes.Command;
 import me.narwhql.spigotmc.experimental.classes.SubCommand;
+import me.narwhql.spigotmc.experimental.manager.CommandUtil;
 import me.narwhql.spigotmc.inventories.InventoryManager;
 import me.narwhql.spigotmc.inventories.PlayerInventory;
 import me.narwhql.spigotmc.player.CustomPlayer;
@@ -28,9 +29,7 @@ public class ListSubCommand extends SubCommand {
         List<PlayerInventory> inventories = player.getInventories();
 
         if (inventories.size() == 0) {
-            player.sendMessage("§3§m-----------------------------------------------------");
-            player.sendMessage("§cYou do not have any inventories saved!");
-            player.sendMessage("§3§m-----------------------------------------------------");
+            CommandUtil.sendMessage(player, "§cYou do not have any inventories saved!");
             return;
         }
 
