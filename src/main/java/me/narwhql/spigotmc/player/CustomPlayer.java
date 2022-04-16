@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SpigotPlayer extends CraftPlayer {
+public class CustomPlayer extends CraftPlayer {
     private ChatColor color;
 
-    public SpigotPlayer(EntityPlayer entity) {
+    public CustomPlayer(EntityPlayer entity) {
         super((CraftServer) Bukkit.getServer(), entity);
     }
 

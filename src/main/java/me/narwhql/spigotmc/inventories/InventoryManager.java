@@ -1,8 +1,10 @@
 package me.narwhql.spigotmc.inventories;
 
 import me.narwhql.spigotmc.Main;
+import me.narwhql.spigotmc.inventories.commands.InventoryCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
@@ -25,6 +27,8 @@ public class InventoryManager implements Listener {
 
     public InventoryManager(Main plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+
+        Main.getInstance().getCommandManager().registerCommand(new InventoryCommand());
     }
 
     public Inventory getInventoryFromBase64(String data) throws IOException {
@@ -69,7 +73,7 @@ public class InventoryManager implements Listener {
 
             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(BACK_ITEM_NAME)) {
                 event.getWhoClicked().closeInventory();
-                Bukkit.dispatchCommand(event.getWhoClicked(), "inventory list");
+                ((Player) event.getWhoClicked()).chat("/inventory list");
             }
         }
 
@@ -84,22 +88,22 @@ public class InventoryManager implements Listener {
 
             if (event.getClick() == ClickType.LEFT) {
                 event.getWhoClicked().closeInventory();
-                Bukkit.dispatchCommand(event.getWhoClicked(), "inventory load " + id);
+                ((Player) event.getWhoClicked()).chat("/inventory load " + id);
             }
 
             else if (event.getClick() == ClickType.RIGHT) {
                 event.getWhoClicked().closeInventory();
-                Bukkit.dispatchCommand(event.getWhoClicked(), "inventory preview " + id);
+                ((Player) event.getWhoClicked()).chat("/inventory preview " + id);
             }
 
             else if (event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT) {
                 event.getWhoClicked().closeInventory();
-                Bukkit.dispatchCommand(event.getWhoClicked(), "inventory delete " + id);
+                ((Player) event.getWhoClicked()).chat("/inventory delete " + id);
             }
 
             else if (event.getClick() == ClickType.MIDDLE) {
                 event.getWhoClicked().closeInventory();
-                Bukkit.dispatchCommand(event.getWhoClicked(), "inventory save " + id);
+                ((Player) event.getWhoClicked()).chat("/inventory save " + id);
             }
         }
     }

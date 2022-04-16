@@ -1,24 +1,21 @@
-package me.narwhql.spigotmc.commands;
+package me.narwhql.spigotmc.pets.commands;
 
 import me.narwhql.spigotmc.Main;
+import me.narwhql.spigotmc.experimental.classes.Command;
 import me.narwhql.spigotmc.pets.Pet;
 import me.narwhql.spigotmc.pets.entities.*;
+import me.narwhql.spigotmc.player.CustomPlayer;
 import org.bukkit.DyeColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 
-public class PetCommand implements CommandExecutor {
+public class PetCommand extends Command {
+    public PetCommand() {
+        super("pet");
+        this.addRequiredArgument("pet name");
+    }
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!(sender instanceof Player)) return false;
-
-        Player player = (Player) sender;
-
-        if (args.length == 0) return false;
-
+    public void run(CustomPlayer player, String commandName, String[] args) {
         Pet pet = Main.getInstance().getPetManager().getPlayerPet(player);
 
         if (pet != null) pet.despawn();
@@ -48,7 +45,5 @@ public class PetCommand implements CommandExecutor {
                 ((Sheep) sheepPet.getEntity()).setBaby();
                 break;
         }
-
-        return true;
     }
 }

@@ -1,14 +1,13 @@
 package me.narwhql.spigotmc;
 
-import me.narwhql.spigotmc.commands.ArmorStandCommand;
 import me.narwhql.spigotmc.commands.ChatColorCommand;
-import me.narwhql.spigotmc.commands.InventoryCommand;
-import me.narwhql.spigotmc.commands.PetCommand;
+import me.narwhql.spigotmc.pets.commands.PetCommand;
 import me.narwhql.spigotmc.inventories.InventoryManager;
 import me.narwhql.spigotmc.listeners.AsyncPlayerChatListener;
 import me.narwhql.spigotmc.listeners.Listeners;
 import me.narwhql.spigotmc.pets.PetManager;
 import me.narwhql.spigotmc.player.PlayerManager;
+import me.narwhql.spigotmc.experimental.manager.CommandManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -16,6 +15,7 @@ public class Main extends JavaPlugin {
 
     private MySQL mySQL;
 
+    private CommandManager commandManager;
     private PlayerManager playerManager;
     private PetManager petManager;
     private InventoryManager inventoryManager;
@@ -27,12 +27,15 @@ public class Main extends JavaPlugin {
         this.mySQL = new MySQL();
         this.mySQL.connect();
 
-        this.initCommands();
         this.initListeners();
 
+        this.commandManager = new CommandManager(this);
         this.playerManager = new PlayerManager(this);
         this.petManager = new PetManager(this);
         this.inventoryManager = new InventoryManager(this);
+
+        this.commandManager.registerCommand(new ChatColorCommand());
+        this.commandManager.registerCommand(new PetCommand());
     }
 
     @Override
@@ -42,6 +45,10 @@ public class Main extends JavaPlugin {
 
     public static Main getInstance() {
         return instance;
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 
     public PetManager getPetManager() {
@@ -58,13 +65,6 @@ public class Main extends JavaPlugin {
 
     public InventoryManager getInventoryManager() {
         return inventoryManager;
-    }
-
-    private void initCommands() {
-        this.getCommand("armorstand").setExecutor(new ArmorStandCommand());
-        this.getCommand("pet").setExecutor(new PetCommand());
-        this.getCommand("chatcolor").setExecutor(new ChatColorCommand());
-        this.getCommand("inventory").setExecutor(new InventoryCommand());
     }
 
     private void initListeners() {
