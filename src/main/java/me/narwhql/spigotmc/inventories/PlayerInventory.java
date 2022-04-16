@@ -2,8 +2,6 @@ package me.narwhql.spigotmc.inventories;
 
 import org.bukkit.inventory.Inventory;
 
-import java.util.Date;
-
 public class PlayerInventory {
     private final int id;
     private final long createdTimestamp;
