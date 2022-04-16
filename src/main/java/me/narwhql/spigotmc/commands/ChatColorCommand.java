@@ -18,6 +18,7 @@ public class ChatColorCommand extends Command {
         super("chatcolor");
         this.setAliases(Collections.singletonList("cc"));
         this.addRequiredArgument("color");
+        this.setAsynchronous(true);
     }
 
     @Override
@@ -31,8 +32,8 @@ public class ChatColorCommand extends Command {
 
         CustomPlayer customPlayer = Main.getInstance().getPlayerManager().getPlayer(player.getName());
 
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> customPlayer.setChatColor(ChatColor.getByChar(color)));
+        customPlayer.setChatColor(ChatColor.getByChar(color));
 
-        player.sendMessage("§aYour chat color has been changed to §" + color + "§lTHIS§a!");
+        CommandUtil.sendMessage(player, "§aYour chat color has been changed to §" + color + "§lTHIS§a!");
     }
 }

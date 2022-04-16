@@ -57,7 +57,38 @@ public class CommandManager implements Listener {
         // the subcommands aren't given, so we send a help menu
         if (args.length == 0 || !command.hasSubCommand(args[0].toLowerCase())) {
             player.sendMessage(command.getHelpLineColor() + "§m-----------------------------------------------------");
-            command.getSubCommands().forEach((name, subCommand) -> player.sendMessage(command.getCommandKeyColor() + "/" + label + " " + subCommand.getName() + (subCommand.getDescription() == null ? "" : "§7: §r" + command.getCommandValueColor() + subCommand.getDescription())));
+            command.getSubCommands().forEach((name, subCommand) -> {
+                StringBuilder builder = new StringBuilder();
+
+                builder
+                        .append(command.getCommandKeyColor())
+                        .append("/")
+                        .append(label)
+                        .append(" ")
+                        .append(subCommand.getName());
+
+                if (subCommand.getArguments().size() != 0) {
+                    if (subCommand.getRequiredArguments().size() != 0) {
+                        builder
+                                .append(" ")
+                                .append(subCommand.getRequiredArguments().stream().map(arg -> "<" + arg.replaceAll(" ", "_") + ">").collect(Collectors.joining(" ")));
+                    }
+                    if (subCommand.getOptionalArguments().size() != 0) {
+                        builder
+                                .append(" ")
+                                .append(subCommand.getOptionalArguments().stream().map(arg -> "(" + arg.replaceAll(" ", "_") + ")").collect(Collectors.joining(" ")));
+                    }
+                }
+
+                if (subCommand.getDescription() != null) {
+                    builder
+                            .append("§7: §r")
+                            .append(subCommand.getCommandValueColor())
+                            .append(subCommand.getDescription());
+                }
+
+                player.sendMessage(builder.toString());
+            });
             player.sendMessage(command.getHelpLineColor() + "§m-----------------------------------------------------");
             return;
         }

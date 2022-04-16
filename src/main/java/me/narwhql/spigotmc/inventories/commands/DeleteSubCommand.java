@@ -11,7 +11,7 @@ public class DeleteSubCommand extends SubCommand {
     public DeleteSubCommand(Command parent) {
         super("delete", parent);
         this.setDescription("Delete an inventory");
-        this.addRequiredArgument("id");
+        this.addOptionalArgument("id");
     }
 
     @Override
